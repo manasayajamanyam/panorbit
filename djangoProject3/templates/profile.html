@@ -1,0 +1,155 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        /* CSS styling */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        /* Style for the labels */
+
+
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 18px;
+            margin: 5px 0;
+
+        }
+
+.sidenav {
+  height: 100%;
+  width: 150px;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 5px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+</style>
+
+</head>
+<body>
+    <div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#">Profile</a>
+  <a href="Comingsoon.html">Posts</a>
+  <a href="Comingsoon.html">Gallery</a>
+        <a href="Comingsoon.html">ToDo</a>
+
+        <a href="index.html">Sign Out</a>
+</div>
+
+<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; </span>
+
+    <h1 style="text-align:center;"> Profile</h1>
+    <div class="container">
+        <div class="profile-details">
+            <img class="profile-pic" src="" alt="Profile Picture">
+            <h1 id="name">
+
+            </h1>
+
+           <p id="username"></p>
+            <p id="email"> </p>
+            <p id="phone"></p>
+             <p id="website">
+            <pre> </pre>
+             <hr size="5" width="60%" color="grey" align="left">
+            <pre> </pre>
+            <p><strong>Company</strong>  </p>
+            <pre> </pre>
+            <p id="company-name"></p>
+            <p id="company-catchPhrase"></p>
+            <p id="company-bs"></p>
+            <pre> </pre>
+             <hr size="5" width="60%" color="grey" align="left">
+            <pre> </pre>
+            <p> <strong>Address</strong></p>
+            <pre> </pre>
+            <p id="address-street"></p>
+            <p id="address-suite"></p>
+            <p id="address-city"></p>
+            <p id="address-zipcode"></p>
+
+            <img src="static/css/map.JPG" alt="" width="700" height="500" style="vertical-align:middle">
+
+        </div>
+    </div>
+
+    <script>
+        // JavaScript code to fetch data from API endpoint
+        fetch('https://panorbit.in/api/users.json')
+            .then(response => response.json())
+            .then(data => {
+                const user = data.users[0]; // Assuming we want to display details of the first user
+                document.querySelector('.profile-pic').src = user.profilepicture;
+                document.querySelector('#name').textContent = user.name;
+                document.querySelector('#username').textContent = `Username : ${user.username}`;
+                document.querySelector('#email').textContent = ` e-mail : ${user.email}`;
+                document.querySelector('#phone').textContent = `Phone : ${user.phone}`;
+                document.querySelector('#address-street').textContent = `Street : ${user.address.street}`;
+                document.querySelector('#address-suite').textContent = `Suite : ${user.address.suite}`;
+                document.querySelector('#address-city').textContent = `City : ${user.address.city}`;
+                document.querySelector('#address-zipcode').textContent = `Zipcode : ${user.address.zipcode}`;
+                document.querySelector('#website').textContent = `Website : ${user.website}`;
+                document.querySelector('#company-name').textContent = `Name : ${user.company.name}`;
+                document.querySelector('#company-catchPhrase').textContent = `catchPhrase : ${user.company.catchPhrase}`;
+                document.querySelector('#company-bs').textContent = `bs : ${user.company.bs}`;
+
+            });
+        function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+    </script>
+</body>
+</html>

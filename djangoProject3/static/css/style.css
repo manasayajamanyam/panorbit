@@ -1,0 +1,37 @@
+.user-list {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 50px 0;
+}
+
+.user-cards {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin-top: 30px;
+}
+
+.user-card {
+	width: 30%;
+	margin-bottom: 30px;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 10px;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.user-card:hover {
+	transform: translateY(-5px);
+	transition: all 0.3s ease-in-out;
+}
+
+.user-card img {
+	width: 100%;
+	height: auto;
+	object-fit: cover;
+}
+
+.user-card .user-name {
+	padding: 20px;
+	font-size: 20px;
+}

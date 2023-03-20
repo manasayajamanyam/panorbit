@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <style>
+        /* Add some basic styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .user-card {
+            width: 300px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            margin: 20px auto;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .user-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .user-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        .user-card h3 {
+            margin-top: 0;
+        }
+        .user-list{
+
+        }
+    </style>
+</head>
+<body>
+    <h1>Select an account</h1>
+
+    <div id="user-list">
+        <!-- User account cards will be added here dynamically -->
+    </div>
+
+    <script>
+        // Make a GET request to the USERS API endpoint
+        fetch('https://panorbit.in/api/users.json')
+            .then(response => response.json())
+            .then(data => {
+                // Loop through each user and create a card element
+                data.users.forEach(user => {
+                    const card = document.createElement('div');
+                    card.classList.add('user-card');
+                    card.addEventListener('click', () => {
+                        // Redirect to profile home page when the card is clicked
+                        window.location.href = `profile.html?id=${user.id}`;
+                    });
+
+                    const img = document.createElement('img');
+                    img.src = user.profilepicture;
+                    img.alt = `${user.name}'s profile picture`;
+                    card.appendChild(img);
+
+                    const info = document.createElement('div');
+                    const name = document.createElement('h3');
+                    name.textContent = user.name;
+                    info.appendChild(name);
+
+
+
+                    card.appendChild(info);
+
+                    // Add the card to the user list
+                    document.getElementById('user-list').appendChild(card);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching user data:', error);
+            });
+    </script>
+
+</body>
+</html>
